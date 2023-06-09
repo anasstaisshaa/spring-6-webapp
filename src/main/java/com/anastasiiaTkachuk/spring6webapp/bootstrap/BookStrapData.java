@@ -2,8 +2,10 @@ package com.anastasiiaTkachuk.spring6webapp.bootstrap;
 
 import com.anastasiiaTkachuk.spring6webapp.domain.Author;
 import com.anastasiiaTkachuk.spring6webapp.domain.Book;
+import com.anastasiiaTkachuk.spring6webapp.domain.Publisher;
 import com.anastasiiaTkachuk.spring6webapp.repository.AuthorRepository;
 import com.anastasiiaTkachuk.spring6webapp.repository.BookRepository;
+import com.anastasiiaTkachuk.spring6webapp.repository.PublisherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ public class BookStrapData implements CommandLineRunner {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final PublisherRepository publisherRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -45,5 +48,13 @@ public class BookStrapData implements CommandLineRunner {
         System.out.println("In Bootstrap");
         System.out.println("Author Count: " + authorRepository.count());
         System.out.println("Book count: " + bookRepository.count());
+
+        Publisher publisher1 = new Publisher();
+        publisherRepository.save(publisher1);
+
+        Publisher publisher2 = new Publisher();
+        publisherRepository.save(publisher2);
+
+        System.out.println("Publisher count: " + publisherRepository.count());
     }
 }

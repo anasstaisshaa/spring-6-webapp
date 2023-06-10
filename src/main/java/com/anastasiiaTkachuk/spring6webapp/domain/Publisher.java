@@ -1,12 +1,11 @@
 package com.anastasiiaTkachuk.spring6webapp.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,4 +21,7 @@ public class Publisher {
     private String city;
     private String state;
     private String zip;
+
+    @OneToMany(mappedBy = "publisher")
+    private Set<Book> books;
 }

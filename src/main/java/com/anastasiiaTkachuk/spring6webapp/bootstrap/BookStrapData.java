@@ -33,7 +33,7 @@ public class BookStrapData implements CommandLineRunner {
 
         Author rod = new Author();
         rod.setFirstName("Rod");
-        rod.setFirstName("Johnson");
+        rod.setLastName("Johnson");
 
         Book noEJB = new Book();
         noEJB.setTitle("J2EE Development without EJB");
@@ -44,17 +44,23 @@ public class BookStrapData implements CommandLineRunner {
 
         ericSaved.getBooks().add(dddSaved);
         rodSaved.getBooks().add(noEJBSaved);
+        dddSaved.getAuthors().add(ericSaved);
+        noEJBSaved.getAuthors().add(rodSaved);
+
+        Publisher publisher = new Publisher();
+        publisher.setPublisherName("My Publisher");
+        publisher.setAddress("123 Main");
+        Publisher savedPublisher = publisherRepository.save(publisher);
+
+        dddSaved.setPublisher(savedPublisher);
+        noEJBSaved.setPublisher(savedPublisher);
+
+        bookRepository.save(dddSaved);
+        bookRepository.save(noEJBSaved);
 
         System.out.println("In Bootstrap");
         System.out.println("Author Count: " + authorRepository.count());
         System.out.println("Book count: " + bookRepository.count());
-
-        Publisher publisher1 = new Publisher();
-        publisherRepository.save(publisher1);
-
-        Publisher publisher2 = new Publisher();
-        publisherRepository.save(publisher2);
-
         System.out.println("Publisher count: " + publisherRepository.count());
     }
 }
